@@ -30,3 +30,14 @@ revealEls.forEach(el => io.observe(el));
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Nav background blur on scroll
+const navEl = document.querySelector('.nav');
+if (navEl) {
+  const onScroll = () => {
+    if (window.scrollY > 24) navEl.classList.add('scrolled');
+    else navEl.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}

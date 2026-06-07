@@ -16,6 +16,9 @@
   --ink: #251812;
   --ink-soft: #4B3A30;
   --leaf: #5A6E3F;
+  --forest: #163528;          /* deep brand green from logo */
+  --forest-dark: #0D2418;     /* darker variant for gradients */
+  --forest-light: #1F4A36;
   --mute: #8a7a6c;
   --line: rgba(37, 24, 18, 0.14);
 
@@ -30,6 +33,10 @@
   --radius: 4px;
   --shadow-sm: 0 2px 8px rgba(37, 24, 18, 0.08);
   --shadow-md: 0 12px 36px rgba(37, 24, 18, 0.14);
+  --shadow-lg: 0 24px 64px rgba(37, 24, 18, 0.22);
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -349,21 +356,42 @@ html[lang="hi"] .quote-trans { font-family: var(--hindi-body); letter-spacing: 0
   align-items: center;
   overflow: hidden;
   color: var(--cream);
+  background: var(--ink);
 }
+/* Modern brand gradient — forest green + warm radial accents.
+   The img URL in markup is ignored; we use a CSS-only background. */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: saturate(0.85) brightness(0.7);
-  transform: scale(1.04);
+  background-image: none !important;
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 30%, rgba(212, 138, 59, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 75% 70%, rgba(194, 94, 46, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 60% 20%, rgba(181, 139, 58, 0.15) 0%, transparent 70%),
+    linear-gradient(135deg, var(--forest-dark) 0%, var(--forest) 45%, var(--ink) 100%);
+  filter: none;
+  transform: none;
+}
+/* Faint logo watermark layered on top of the gradient */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/logo/mithila-yoga-white.jpg');
+  background-size: 420px auto;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(37,24,18,0.6) 0%, rgba(37,24,18,0.4) 40%, rgba(37,24,18,0.85) 100%),
-    radial-gradient(ellipse at center, transparent 0%, rgba(37,24,18,0.4) 100%);
+    linear-gradient(180deg, transparent 0%, rgba(13, 36, 24, 0.3) 60%, rgba(13, 36, 24, 0.55) 100%);
+  z-index: 1;
 }
 .hero-content {
   position: relative;
@@ -1109,4 +1137,360 @@ html[lang="hi"] .quote-trans { font-family: var(--hindi-body); letter-spacing: 0
   .footer-grid { grid-template-columns: 1fr; }
   .museum-grid { grid-template-columns: 1fr; }
   .museum-grid .gallery-card { height: 180px; }
+}
+
+/* ============================================================
+   MODERNIZATION PASS
+   Subtle motion, hover micro-interactions, refined type, depth
+   ============================================================ */
+
+/* Subtle paper-grain noise — applied via background to body, no overlay
+   so it doesn't fight with content colors. Removed background-attachment:fixed
+   because it causes severe paint/render issues in some browsers. */
+body {
+  background-color: var(--parchment);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.15 0 0 0 0 0.1 0 0 0 0 0.07 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Type — modern display feel */
+h1, h2 { letter-spacing: -0.018em; }
+.display { letter-spacing: -0.02em; }
+.page-title { letter-spacing: -0.022em; }
+.hero h1 { letter-spacing: -0.025em; }
+
+/* ============== NAV — animated underline =============== */
+.nav-links a:not(.nav-cta) {
+  position: relative;
+  padding-bottom: 6px;
+}
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--saffron);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .35s var(--ease-out);
+}
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a:not(.nav-cta).current::after {
+  transform: scaleX(1);
+}
+
+/* ============== BUTTONS — modern hover ================= */
+.btn {
+  transition: transform .35s var(--ease-out),
+              box-shadow .35s var(--ease-out),
+              background-color .25s ease,
+              border-color .25s ease,
+              color .25s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 100%);
+  transform: skewX(-20deg);
+  transition: left .7s var(--ease-out);
+  z-index: -1;
+  pointer-events: none;
+}
+.btn:hover::before { left: 130%; }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(164, 72, 27, 0.32);
+}
+.btn-ghost:hover,
+.btn-ghost-dark:hover { transform: translateY(-1px); }
+
+/* ============== CARDS — lift + image zoom ============== */
+.figure-card,
+.pillar-card,
+.space-card,
+.visit-card,
+.program-card,
+.gallery-card {
+  transition: transform .5s var(--ease-out),
+              box-shadow .5s var(--ease-out);
+}
+.figure-card .figure-img,
+.pillar-card .pillar-img,
+.space-card .space-img {
+  transition: transform .8s var(--ease-out);
+  will-change: transform;
+}
+.figure-card { overflow: hidden; }
+.figure-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.figure-card:hover .figure-img { transform: scale(1.05); }
+
+.pillar-card { overflow: hidden; }
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.pillar-card:hover .pillar-img { transform: scale(1.06); }
+
+.space-card { overflow: hidden; }
+.space-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.space-card:hover .space-img { transform: scale(1.05); }
+
+.visit-card:hover,
+.program-card:hover,
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-card .g-img { will-change: transform; }
+.gallery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============== STAGGER REVEAL ========================= */
+.figures-grid > .reveal,
+.pillars-grid > .reveal,
+.spaces-grid > .reveal,
+.programs-grid > .reveal,
+.visit-grid > .reveal,
+.museum-grid > .reveal {
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+}
+.figures-grid > .reveal:nth-child(1),
+.pillars-grid > .reveal:nth-child(1),
+.spaces-grid > .reveal:nth-child(1),
+.programs-grid > .reveal:nth-child(1),
+.visit-grid > .reveal:nth-child(1),
+.museum-grid > .reveal:nth-child(1) { transition-delay: 0s; }
+.figures-grid > .reveal:nth-child(2),
+.pillars-grid > .reveal:nth-child(2),
+.spaces-grid > .reveal:nth-child(2),
+.programs-grid > .reveal:nth-child(2),
+.visit-grid > .reveal:nth-child(2),
+.museum-grid > .reveal:nth-child(2) { transition-delay: 0.08s; }
+.figures-grid > .reveal:nth-child(3),
+.pillars-grid > .reveal:nth-child(3),
+.spaces-grid > .reveal:nth-child(3),
+.programs-grid > .reveal:nth-child(3),
+.visit-grid > .reveal:nth-child(3),
+.museum-grid > .reveal:nth-child(3) { transition-delay: 0.16s; }
+.figures-grid > .reveal:nth-child(4),
+.spaces-grid > .reveal:nth-child(4),
+.programs-grid > .reveal:nth-child(4),
+.visit-grid > .reveal:nth-child(4),
+.museum-grid > .reveal:nth-child(4) { transition-delay: 0.24s; }
+.museum-grid > .reveal:nth-child(5) { transition-delay: 0.32s; }
+
+/* ============== PILLAR CARDS — branded gradient =========
+   Replace random picsum with brand gradient when the image
+   source is a picsum URL (since we don't control HTML yet).
+   The :nth-child gives each card a distinct accent. */
+.pillars-grid .pillar-card .pillar-img {
+  position: relative;
+}
+.pillars-grid .pillar-card:nth-child(1) .pillar-img {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(212,138,59,0.45) 0%, transparent 60%),
+    linear-gradient(135deg, var(--forest) 0%, var(--ink) 100%) !important;
+}
+.pillars-grid .pillar-card:nth-child(2) .pillar-img {
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(181,139,58,0.4) 0%, transparent 60%),
+    linear-gradient(135deg, var(--ink) 0%, var(--saffron-dark) 100%) !important;
+}
+.pillars-grid .pillar-card:nth-child(3) .pillar-img {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(212,138,59,0.35) 0%, transparent 60%),
+    linear-gradient(135deg, var(--saffron-dark) 0%, var(--forest-dark) 100%) !important;
+}
+/* Subtle lotus-icon watermark in pillar imagery */
+.pillars-grid .pillar-card .pillar-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/logo/mithila-yoga-white.jpg');
+  background-size: auto 140%;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ============== SOFT FADE-IN of page hero =============== */
+.page-hero {
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(194, 94, 46, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, var(--cream) 0%, var(--parchment) 100%);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(194,94,46,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ============== Header — refined sticky blur ============ */
+.nav {
+  transition: background-color .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+.nav.scrolled {
+  background: rgba(250, 244, 230, 0.85);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 4px 24px rgba(37, 24, 18, 0.06);
+}
+
+/* ============== Topbar — refined gold accents =========== */
+.topbar { font-weight: 400; }
+
+/* ============== Eyebrow — modern accent ================ */
+.eyebrow {
+  position: relative;
+  padding-left: 24px;
+}
+.eyebrow::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 1.5px;
+  background: var(--saffron);
+}
+.eyebrow.light::before { background: var(--ochre); }
+.section-head.center .eyebrow { padding-left: 0; display: inline-block; }
+.section-head.center .eyebrow::before { display: none; }
+
+/* ============== Hero pillars — modern divider ========== */
+.hero-pillars > div {
+  position: relative;
+  padding-left: 0;
+}
+.hero-pillars > div:not(:first-child) {
+  padding-left: 0;
+}
+
+/* ============== Section-head refinement ================= */
+.section-head h2 { letter-spacing: -0.018em; }
+
+/* ============== Improved smooth scroll behaviour ======== */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============== Focus state — modern, accessible ======= */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============== Quote / verse refinement on tradition === */
+.verse {
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+}
+.verse:hover {
+  transform: translateX(2px);
+  box-shadow: 0 16px 40px rgba(37, 24, 18, 0.1);
+}
+
+/* ============== Closing CTA — refined dark moment ====== */
+.closing-cta {
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 30%, rgba(212, 138, 59, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 70% 70%, rgba(194, 94, 46, 0.12) 0%, transparent 60%),
+    var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.closing-cta::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212,138,59,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ============== Pull-quote refinement =================== */
+.pullquote {
+  position: relative;
+}
+.pullquote::before {
+  content: '"';
+  position: absolute;
+  top: -16px;
+  left: 18px;
+  font-family: var(--serif);
+  font-size: 5rem;
+  color: var(--saffron);
+  opacity: 0.18;
+  line-height: 1;
+}
+
+/* ============== Heritage cards — figure aspect ========== */
+.figure-img {
+  transition: transform .8s var(--ease-out);
+  will-change: transform;
+}
+
+/* ============== Form inputs — modern focus ============= */
+.col-form input,
+.col-form select,
+.col-form textarea {
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.col-form input:focus,
+.col-form select:focus,
+.col-form textarea:focus {
+  outline: none;
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 4px rgba(194, 94, 46, 0.12);
+}
+
+/* ============== Topbar refinement ====================== */
+.topbar-meta .sanskrit {
+  background: linear-gradient(135deg, var(--ochre) 0%, #E0B05D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
