@@ -22,6 +22,8 @@
   --serif: 'Cormorant Garamond', 'Georgia', serif;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --devanagari: 'Tiro Devanagari Hindi', 'Cormorant Garamond', serif;
+  --hindi-body: 'Noto Sans Devanagari', 'Tiro Devanagari Hindi', system-ui, sans-serif;
+  --hindi-serif: 'Tiro Devanagari Hindi', 'Cormorant Garamond', serif;
 
   --container: 1200px;
   --gutter: 24px;
@@ -167,6 +169,78 @@ p { color: var(--ink-soft); }
 }
 .topbar-meta .sanskrit { color: var(--ochre); font-size: .95rem; }
 .topbar-sep { opacity: .4; }
+
+/* LANGUAGE TOGGLE */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.lang-toggle a {
+  color: var(--cream);
+  opacity: .55;
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: opacity .2s;
+}
+.lang-toggle a:hover { opacity: 1; color: var(--ochre); }
+.lang-toggle a.active {
+  opacity: 1;
+  color: var(--ochre);
+  pointer-events: none;
+}
+.lang-toggle span { color: var(--cream); opacity: .3; }
+
+/* Hindi page body when html[lang=hi] */
+html[lang="hi"] body {
+  font-family: var(--hindi-body);
+  line-height: 1.75;
+  font-weight: 400;
+}
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] h4,
+html[lang="hi"] h5 {
+  font-family: var(--hindi-serif);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+html[lang="hi"] h1 em { font-style: normal; color: var(--saffron); }
+html[lang="hi"] .eyebrow {
+  font-family: var(--hindi-body);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+html[lang="hi"] .btn { font-family: var(--hindi-body); font-weight: 500; letter-spacing: 0.01em; }
+html[lang="hi"] .logo-name { font-family: var(--hindi-serif); font-size: 1.45rem; }
+html[lang="hi"] .logo-tag { letter-spacing: 0.04em; }
+html[lang="hi"] .verse-translit { font-family: var(--serif); }
+html[lang="hi"] .verse-trans { font-family: var(--hindi-body); }
+html[lang="hi"] .reading-list li { font-family: var(--hindi-body); }
+
+/* Tighten letter-spacing on Devanagari elements that inherit English defaults */
+html[lang="hi"] .pillar-label,
+html[lang="hi"] .tier-label,
+html[lang="hi"] .footer-tag,
+html[lang="hi"] .footer-col h5,
+html[lang="hi"] .info-card h4,
+html[lang="hi"] .col-form label span,
+html[lang="hi"] .contact-list strong,
+html[lang="hi"] .figure-role,
+html[lang="hi"] .pillar-eyebrow,
+html[lang="hi"] .spaces-title,
+html[lang="hi"] .col-text .sub {
+  letter-spacing: 0.04em;
+}
+html[lang="hi"] .nav-links a { letter-spacing: 0.005em; font-size: .95rem; }
+html[lang="hi"] .topbar { font-size: .82rem; }
+html[lang="hi"] .quote-translit { font-family: var(--serif); }
+html[lang="hi"] .quote-trans { font-family: var(--hindi-body); letter-spacing: 0; }
 
 /* ============= NAV ============= */
 .nav {
