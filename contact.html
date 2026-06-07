@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with Mithila Yoga — for retreat-leader enquiries, archive access, museum visits, or just to ask a question. Bishanpur, Madhubani, Bihar." />
+  <title>Get in Touch — Mithila Yoga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tradition.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-contact">
+        <a href="index.html" aria-label="Home">← Mithila Yoga</a>
+      </div>
+      <div class="topbar-meta">
+        <div class="lang-toggle" aria-label="Language">
+          <a href="contact.html" class="active" aria-current="page">EN</a>
+          <span aria-hidden="true">·</span>
+          <a href="hi/contact.html" lang="hi">हिं</a>
+        </div>
+        <span class="hide-sm topbar-sep">·</span>
+        <span class="sanskrit" aria-hidden="true">योगः चित्तवृत्तिनिरोधः</span>
+        <span class="hide-sm topbar-sep">·</span>
+        <span class="hide-sm">Bishanpur, Madhubani · Bihar</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="32" cy="32" r="28"/>
+            <circle cx="32" cy="32" r="20"/>
+            <circle cx="32" cy="32" r="3" fill="currentColor"/>
+            <path d="M32 4 L32 14 M32 50 L32 60 M4 32 L14 32 M50 32 L60 32 M11.7 11.7 L18.7 18.7 M45.3 45.3 L52.3 52.3 M52.3 11.7 L45.3 18.7 M18.7 45.3 L11.7 52.3"/>
+          </svg>
+        </span>
+        <span class="logo-text">
+          <span class="logo-name">Mithila Yoga</span>
+          <span class="logo-tag">The yoga of Janaka's land</span>
+        </span>
+      </a>
+      <nav class="nav-links">
+        <a href="tradition.html">Tradition</a>
+        <a href="retreat.html">Retreat</a>
+        <a href="archives.html">Archives</a>
+        <a href="museum.html">Museum</a>
+        <a href="programs.html">Programmes</a>
+        <a href="visit.html">Visit</a>
+        <a href="contact.html" class="nav-cta current">Get in Touch</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container narrow">
+      <p class="eyebrow dark">Get in touch</p>
+      <h1 class="page-title">Write to us.</h1>
+      <p class="page-lede">Whether you are a teacher planning a retreat, a scholar requesting archive access, a journalist, or simply curious — we'd be glad to hear from you. We answer all messages personally, usually within a few days.</p>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <div class="container two-col">
+      <div class="col-text">
+        <p class="eyebrow dark">Reach us at</p>
+        <h2>The simplest ways.</h2>
+        <ul class="contact-list">
+          <li><strong>Email</strong> · hello@mithilayoga.org</li>
+          <li><strong>Phone / WhatsApp</strong> · <span class="placeholder">[+91 number]</span></li>
+          <li><strong>Address</strong> · Mithila Yoga, Bishanpur, Madhubani, Bihar <span class="placeholder">[PIN]</span></li>
+        </ul>
+        <p class="contact-note">For retreat enquiries, please mention your expected dates, group size, and the kind of programme you wish to lead.</p>
+
+        <h3 class="sub" style="margin-top: 36px;">What to expect</h3>
+        <p>We are a small team and we answer enquiries ourselves. Most messages get a reply within two or three days. If you have not heard back after a week, please write again — sometimes a message lands in spam.</p>
+        <p>For complex enquiries — research access, group bookings, programme proposals — a phone or WhatsApp call after the initial email often helps. Mention your time zone and we'll propose a window.</p>
+      </div>
+
+      <form class="col-form" onsubmit="event.preventDefault(); alert('Thanks — this form will be wired up when the site goes live.');">
+        <div class="form-row">
+          <label>
+            <span>Your name</span>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required />
+          </label>
+        </div>
+        <label class="full">
+          <span>I am writing as a…</span>
+          <select name="role">
+            <option>Yoga teacher / retreat leader</option>
+            <option>Scholar / researcher</option>
+            <option>Museum visitor</option>
+            <option>Journalist / media</option>
+            <option>Programme partner</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Preferred dates</span>
+            <input type="text" name="dates" placeholder="e.g. November 2026" />
+          </label>
+          <label>
+            <span>Group size (if relevant)</span>
+            <input type="text" name="group" placeholder="e.g. 12 students + teacher" />
+          </label>
+        </div>
+        <label class="full">
+          <span>Your message</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Send message</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section pillars-preview alt-bg">
+    <div class="container narrow">
+      <p class="eyebrow dark">Before you write</p>
+      <h2>You may already find your answer.</h2>
+      <p class="lede">If your question is about our spaces, please first see the <a href="retreat.html">retreat page</a>. If it is about reaching us, see the <a href="visit.html">visit page</a>. If it is about what we hold in the archive, see the <a href="archives.html">archives page</a>. If it is a general question about Mithila's yoga tradition, the <a href="tradition.html">tradition page</a> may help.</p>
+      <p class="muted-note" style="margin-top: 24px;">For media enquiries, please write to the email above with "Press" in the subject line. We will reply promptly.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 64 64" width="54" height="54" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="32" cy="32" r="28"/>
+            <circle cx="32" cy="32" r="20"/>
+            <circle cx="32" cy="32" r="3" fill="currentColor"/>
+            <path d="M32 4 L32 14 M32 50 L32 60 M4 32 L14 32 M50 32 L60 32 M11.7 11.7 L18.7 18.7 M45.3 45.3 L52.3 52.3 M52.3 11.7 L45.3 18.7 M18.7 45.3 L11.7 52.3"/>
+          </svg>
+          <div>
+            <div class="footer-name">Mithila Yoga</div>
+            <div class="footer-tag">The yoga of Janaka's land</div>
+          </div>
+        </div>
+        <p class="footer-bio">An independent institution at Bishanpur, Madhubani, honouring the contemplative tradition of the Mithila region.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="tradition.html">The Tradition</a></li>
+          <li><a href="retreat.html">Retreat Centre</a></li>
+          <li><a href="archives.html">Archives</a></li>
+          <li><a href="museum.html">Museum</a></li>
+          <li><a href="programs.html">Programmes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Visit</h5>
+        <ul>
+          <li><a href="visit.html">Getting here</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>Bishanpur, Madhubani</li>
+          <li>Bihar, India</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>hello@mithilayoga.org</li>
+          <li><span class="placeholder">[+91 phone]</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="sanskrit">सत्यं ज्ञानम् अनन्तं ब्रह्म</span>
+      <span>© <span id="year"></span> Mithila Yoga · Bishanpur, Madhubani, Bihar</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
