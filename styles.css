@@ -270,21 +270,25 @@ html[lang="hi"] .quote-trans { font-family: var(--hindi-body); letter-spacing: 0
 }
 .logo:hover { color: var(--saffron); }
 
+/* Show the full brand logo (icon + wordmark + tagline) in nav.
+   Drops the separate text wordmark alongside since logo includes it. */
 .logo-mark {
   color: var(--saffron);
-  display: inline-flex;
-  width: 56px;
-  height: 50px;
-  overflow: hidden;
+  display: inline-block;
+  width: 120px;
+  height: auto;
   flex-shrink: 0;
 }
 .logo-mark img {
-  width: 56px;
-  height: auto;        /* preserves aspect — image becomes ~84px tall */
   display: block;
-  mix-blend-mode: multiply;   /* white background blends into parchment */
-  transform: translateY(-4px); /* nudge so icon centres in container */
+  width: 120px;
+  height: auto;              /* preserves logo aspect, ~180px tall */
+  mix-blend-mode: multiply;  /* white background blends into parchment */
 }
+.logo .logo-text { display: none; }  /* logo image already carries wordmark */
+
+/* Tighten nav vertical padding so the taller logo doesn't push hero too far */
+.nav-inner { padding-top: 10px; padding-bottom: 10px; }
 /* Footer keeps the gold-on-dark SVG mark — multiply doesn't work on dark bg */
 .footer .logo-mark,
 .footer-logo .logo-mark { width: auto; height: auto; overflow: visible; }
