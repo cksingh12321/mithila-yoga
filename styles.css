@@ -472,6 +472,24 @@ p { color: var(--ink-soft); }
   margin-right: auto;
 }
 
+.heritage-cta {
+  margin-top: 56px;
+  text-align: center;
+  padding: 32px 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.heritage-cta p {
+  max-width: 64ch;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
 /* ============= PILLARS PREVIEW ============= */
 .pillars-grid {
   display: grid;
