@@ -273,7 +273,23 @@ html[lang="hi"] .quote-trans { font-family: var(--hindi-body); letter-spacing: 0
 .logo-mark {
   color: var(--saffron);
   display: inline-flex;
+  width: 56px;
+  height: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
+.logo-mark img {
+  width: 56px;
+  height: auto;        /* preserves aspect — image becomes ~84px tall */
+  display: block;
+  mix-blend-mode: multiply;   /* white background blends into parchment */
+  transform: translateY(-4px); /* nudge so icon centres in container */
+}
+/* Footer keeps the gold-on-dark SVG mark — multiply doesn't work on dark bg */
+.footer .logo-mark,
+.footer-logo .logo-mark { width: auto; height: auto; overflow: visible; }
+.footer .logo-mark img,
+.footer-logo .logo-mark img { mix-blend-mode: normal; transform: none; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
 .logo-name {
   font-family: var(--serif);
